@@ -1,10 +1,7 @@
-"""Procedural bank account management — one account.
-
-An account is just a dict: {"owner": ..., "balance": ...}.
-Every function below takes that dict as its first argument.
-
-Fill in each function so that test_bank_single.py passes.
-"""
+class Account:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.balance = balance
 
 
 def create_account(owner, balance=0):
@@ -12,7 +9,13 @@ def create_account(owner, balance=0):
 
     Should raise ValueError if balance is negative.
     """
-    raise NotImplementedError
+    if balance < 0:
+        raise ValueError
+
+    return {
+        "owner": owner,
+        "balance": balance,
+    }
 
 
 def deposit(account, amount):
@@ -20,7 +23,10 @@ def deposit(account, amount):
 
     Should raise ValueError if amount is not positive.
     """
-    raise NotImplementedError
+    if amount <= 0:
+        raise ValueError
+
+    account["balance"] += amount
 
 
 def withdraw(account, amount):
@@ -29,9 +35,9 @@ def withdraw(account, amount):
     Should raise ValueError if amount is not positive, or if amount
     is more than the account's current balance.
     """
-    raise NotImplementedError
+    account["balance"] -= amount
 
 
 def get_balance(account):
     """Return account's current balance."""
-    raise NotImplementedError
+    return account["balance"]
